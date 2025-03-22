@@ -3,7 +3,7 @@
 session_start();
 include "../db.php";
 
-if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
+if (!isset($_SESSION["role"]) || $_SESSION["role"] != "user") {
     header("Location: ../index.php");
     exit;
 }
@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin dashboard</title>
+    <title>User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/style.css"> <!-- ตรวจสอบเส้นทางไฟล์ CSS -->
 </head>
@@ -26,12 +26,12 @@ $result = mysqli_query($conn, $query);
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="profile">
-            <img src="../images/admin.jpg" alt="Admin Profile">
-            <p>Admin</p>
+            <img src="../images/user.jpg" alt="User Profile">
+            <p>ผู้ใช้</p>
         </div>
         <ul>
             <li><a href="#">อุปกรณ์ที่ยืม</a></li>
-            <li><a href="#">อุปกรณ์ที่คืน</a></li>
+            <li><a href="#">ประวัติการยืม</a></li>
             <li><a href="#">⚙︎</a></li>
         </ul>
     </div>
@@ -42,10 +42,6 @@ $result = mysqli_query($conn, $query);
             <h1 class="mb-4">รายการอุปกรณ์ IT</h1>
             <div class="row">
                 <?php
-                include "../db.php"; // เชื่อมต่อฐานข้อมูล
-                $query = "SELECT * FROM items";
-                $result = mysqli_query($conn, $query);
-                
                 while ($row = mysqli_fetch_assoc($result)) { ?>
                     <div class="col-md-4 mb-3">
                         <div class="card">
